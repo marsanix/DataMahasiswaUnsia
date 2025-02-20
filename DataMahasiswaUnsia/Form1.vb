@@ -26,28 +26,13 @@ Imports System.IO
 
 Public Class Form1
 
-    Dim Conn As MySqlConnection
-    Dim ConnStr As String
     Dim Cmd As MySqlCommand
     Dim Da As MySqlDataAdapter
     Dim Rd As MySqlDataReader
     Dim Ds As DataSet
 
-    Sub ConnectDB()
-        ConnStr = "server=localhost;user=root;database=datamhsunsia;port=3306;password=toor;"
-        Conn = New MySqlConnection(ConnStr)
+    Dim DB As New DbMahasiswa()
 
-        Try
-            Conn.Open()
-            ' Your code to interact with the database goes here
-        Catch ex As Exception
-            MessageBox.Show("Error: " & ex.Message)
-        Finally
-            Conn.Close()
-        End Try
-
-
-    End Sub
 
     Sub InsertData()
 
@@ -55,12 +40,12 @@ Public Class Form1
         Dim filename As String = Path.GetFileName(Label9.Text)
 
         Try
-            Call ConnectDB()
-            Conn.Open()
+            Call DB.ConnectDB()
+            DB.Conn.Open()
             Dim sql As String = "INSERT INTO mahasiswa
                                 (id, nim, nama, jenis_kelamin, hp, email, alamat, prodi, foto)
                                 VALUES(0, '" & TextBox1.Text & "', '" & TextBox2.Text & "', '" & jenisKelamin & "', '" & TextBox3.Text & "', '" & TextBox4.Text & "', '" & TextBox5.Text & "', '" & ComboBox2.Text & "', '" & filename & "');"
-            Cmd = New MySqlCommand(sql, Conn)
+            Cmd = New MySqlCommand(sql, DB.Conn)
             Cmd.ExecuteNonQuery()
 
             Call SaveFoto()
@@ -72,7 +57,7 @@ Public Class Form1
         Catch ex As Exception
             MessageBox.Show("Error: " & ex.Message)
         Finally
-            Conn.Close()
+            DB.Conn.Close()
         End Try
 
 
@@ -100,10 +85,10 @@ Public Class Form1
 
                 Try
 
-                    Call ConnectDB()
-                    Conn.Open()
+                    Call DB.ConnectDB()
+                    DB.Conn.Open()
                     Dim sql As String = "UPDATE mahasiswa
-                                    SET nama='" & TextBox1.Text & "', 
+                                    SET nama='" & TextBox2.Text & "', 
                                     jenis_kelamin='" & jenisKelamin & "', 
                                     hp='" & TextBox3.Text & "', 
                                     email='" & TextBox4.Text & "', 
@@ -112,7 +97,7 @@ Public Class Form1
                                     " & ubahFoto & "
                                     WHERE id = @id"
 
-                    Cmd = New MySqlCommand(sql, Conn)
+                    Cmd = New MySqlCommand(sql, DB.Conn)
                     Cmd.Parameters.AddWithValue("@id", id)
                     Cmd.ExecuteNonQuery()
 
@@ -122,7 +107,7 @@ Public Class Form1
                 Catch ex As Exception
                     'MessageBox.Show("Error: " & ex.Message)
                 Finally
-                    Conn.Close()
+                    DB.Conn.Close()
                 End Try
 
                 Call LoadData()
@@ -137,8 +122,8 @@ Public Class Form1
 
     Sub LoadData()
 
-        Call ConnectDB()
-        Da = New MySqlDataAdapter("SELECT id, nim, nama, jenis_kelamin, hp, email, prodi, alamat, foto FROM mahasiswa", Conn)
+        Call DB.ConnectDB()
+        Da = New MySqlDataAdapter("SELECT id, nim, nama, jenis_kelamin, hp, email, prodi, alamat, foto FROM mahasiswa ORDER BY id DESC", DB.Conn)
         Ds = New DataSet
         Ds.Clear()
         Da.Fill(Ds, "mahasiswa")
@@ -183,7 +168,7 @@ Public Class Form1
             If result = DialogResult.Yes Then
 
                 Try
-                    Conn.Open()
+                    DB.Conn.Open()
 
                     ' Ambil ID atau kunci utama dari baris yang dipilih
                     Dim selectedRow As DataGridViewRow = DataGridView1.SelectedRows(0)
@@ -191,7 +176,7 @@ Public Class Form1
 
                     ' Perintah SQL untuk menghapus data
                     Dim sql As String = "DELETE FROM mahasiswa WHERE id = @id"
-                    Dim cmd As New MySqlCommand(sql, Conn)
+                    Dim cmd As New MySqlCommand(sql, DB.Conn)
                     cmd.Parameters.AddWithValue("@id", id)
 
                     ' Jalankan perintah SQL
@@ -202,7 +187,7 @@ Public Class Form1
                 Catch ex As Exception
                     MessageBox.Show("Error: " & ex.Message)
                 Finally
-                    Conn.Close()
+                    DB.Conn.Close()
                 End Try
 
                 MessageBox.Show("Data mahasiswa yang dipilih berhasil dihapus.")
@@ -344,10 +329,10 @@ Public Class Form1
 
     Private Sub TextBox1_KeyPress(sender As Object, e As KeyPressEventArgs) Handles TextBox1.KeyPress
         If e.KeyChar = Chr(13) Then
-            Call ConnectDB()
-            Conn.Open()
+            Call DB.ConnectDB()
+            DB.Conn.Open()
 
-            Cmd = New MySqlCommand("SELECT id, nim, nama, jenis_kelamin, hp, email, alamat, prodi, foto  FROM mahasiswa WHERE nim='" & TextBox1.Text & "'", Conn)
+            Cmd = New MySqlCommand("SELECT id, nim, nama, jenis_kelamin, hp, email, alamat, prodi, foto  FROM mahasiswa WHERE nim='" & TextBox1.Text & "'", DB.Conn)
             Rd = Cmd.ExecuteReader
             Rd.Read()
             If Rd.HasRows Then
@@ -377,7 +362,7 @@ Public Class Form1
                 MsgBox("Data tidak ditemukan")
             End If
 
-            Conn.Close()
+            DB.Conn.Close()
 
 
         End If
