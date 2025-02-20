@@ -216,6 +216,11 @@ Public Class Form1
         Call LoadData()
         Call KondisiAwal()
 
+        If System.IO.File.Exists("Logs.txt") Then
+            Label11.Text = System.IO.File.ReadAllText("Logs.txt")
+
+        End If
+
 
     End Sub
 
@@ -432,5 +437,10 @@ Public Class Form1
 
     Private Sub Button3_Click(sender As Object, e As EventArgs) Handles Button3.Click
         Call UpdateData()
+    End Sub
+
+    Private Sub Form1_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+        Dim currentDateTime As DateTime = DateTime.Now
+        System.IO.File.WriteAllText("Logs.txt", currentDateTime)
     End Sub
 End Class

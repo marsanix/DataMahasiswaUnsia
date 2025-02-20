@@ -51,6 +51,8 @@ Partial Class Form1
         Me.Button2 = New System.Windows.Forms.Button()
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog()
         Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label11 = New System.Windows.Forms.Label()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -339,11 +341,31 @@ Partial Class Form1
         Me.DataGridView1.Size = New System.Drawing.Size(828, 323)
         Me.DataGridView1.TabIndex = 5
         '
+        'Label10
+        '
+        Me.Label10.AutoSize = True
+        Me.Label10.Location = New System.Drawing.Point(24, 766)
+        Me.Label10.Name = "Label10"
+        Me.Label10.Size = New System.Drawing.Size(121, 13)
+        Me.Label10.TabIndex = 6
+        Me.Label10.Text = "Waktu Terkahir Dibuka:"
+        '
+        'Label11
+        '
+        Me.Label11.AutoSize = True
+        Me.Label11.Location = New System.Drawing.Point(151, 766)
+        Me.Label11.Name = "Label11"
+        Me.Label11.Size = New System.Drawing.Size(45, 13)
+        Me.Label11.TabIndex = 7
+        Me.Label11.Text = "Label11"
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(882, 767)
+        Me.ClientSize = New System.Drawing.Size(882, 797)
+        Me.Controls.Add(Me.Label11)
+        Me.Controls.Add(Me.Label10)
         Me.Controls.Add(Me.DataGridView1)
         Me.Controls.Add(Me.GroupBox3)
         Me.Controls.Add(Me.GroupBox2)
@@ -393,4 +415,6 @@ Partial Class Form1
     Friend WithEvents OpenFileDialog1 As OpenFileDialog
     Friend WithEvents Label9 As Label
     Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents Label10 As Label
+    Friend WithEvents Label11 As Label
 End Class
