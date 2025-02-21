@@ -24,7 +24,7 @@ https://youtu.be/Gc3MoWOE4PE?si=AW7izoxBNVRFjT2P
 
 ## Screenshots
 
-![App Screenshot](https://i.ibb.co.com/mx8ZpfD/Screenshot-2025-02-20-215029.png)
+![App Screenshot](https://raw.githubusercontent.com/marsanix/DataMahasiswaUnsia/refs/heads/master/Screenshot%202025-02-20%20215029.png)
 
 
 ## Authors
