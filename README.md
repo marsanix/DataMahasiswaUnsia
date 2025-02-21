@@ -4,7 +4,7 @@
 Aplikasi DataMahasiswaUNSIA, sebagai contoih aplikasi yang dibuat menggunakan Bahasa Programrograman VB.NET dengan Database MySQL dengan fitur CRUD, Menyimpan dan Membaca File Gambar dan Text. 
 
 
-![Logo](https://i.ibb.co.com/QFSgRLFz/Screenshot-2025-02-20-182126.png)
+![Logo](https://raw.githubusercontent.com/marsanix/DataMahasiswaUnsia/refs/heads/master/Screenshot%202025-02-20%20182126.png)
 
 
 ## Demo
